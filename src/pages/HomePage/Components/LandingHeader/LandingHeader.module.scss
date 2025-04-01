@@ -1,0 +1,49 @@
+@keyframes slideRight {
+	from {
+		transform: translateX(-30%);
+	}
+
+	to {
+		transform: translateX(0%);
+	}
+}
+
+@keyframes slideLeft {
+	from {
+		transform: translateX(30%);
+	}
+
+	to {
+		transform: translateX(0%);
+	}
+}
+
+@keyframes slideUp {
+	from {
+		transform: translateY(60%);
+	}
+
+	to {
+		transform: translateY(0%);
+	}
+}
+
+.bg-header {
+	animation-name: slideRight;
+	animation-duration: 1s;
+	animation-timing-function: ease-out;
+}
+
+.bg-content {
+	animation-name: slideLeft;
+	animation-duration: 1s;
+	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+}
+
+.bg-button-play {
+	animation-name: slideUp;
+	animation-duration: 1s;
+	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+}
