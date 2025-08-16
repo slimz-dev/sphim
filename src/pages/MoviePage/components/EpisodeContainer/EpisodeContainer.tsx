@@ -7,6 +7,7 @@ import Hls from 'hls.js';
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EpisodeSkeleton from './SkeletonRender';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const EpisodeContainer = ({ data }) => {
 	const videoRef = useRef<null | HTMLVideoElement>(null);
@@ -33,8 +34,7 @@ const EpisodeContainer = ({ data }) => {
 	}, []);
 
 	const handleChooseEpisode = (episode) => {
-		const { movieFolder, movieID, fileName } = getLink(episode.link_m3u8);
-		navigate(routeName.WatchPage(movieFolder, movieID, fileName));
+		navigate(routeName.WatchPage(data.movie[0].slug, episode.slug));
 	};
 
 	return (
@@ -65,7 +65,7 @@ const EpisodeContainer = ({ data }) => {
 									<div className="flex max-sm:block flex-1">
 										<div className="flex items-center justify-center">
 											<div className="relative w-fit h-fit border border-[#2c2c2c] rounded-md">
-												<img
+												<LazyLoadImage
 													className="w-40  h-32 rounded-md opacity-50"
 													src={data.movie[0].thumb_url}
 													alt="movie thumb"

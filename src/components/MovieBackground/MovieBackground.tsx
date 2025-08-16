@@ -1,13 +1,9 @@
-import getHotMovies from '@com/services/getNewestMovie';
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import { faPlay, faPlus, faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import ChangeSlide from './components/ChangeSlide/ChangeSlide';
 import Slider from 'react-slick';
-import { APP_DOMAIN_CDN_IMAGE } from '@com/constants';
-import { movieSlice } from '@com/redux/movieSlice';
-import SlideArrow from '../SlideArrow/SlideArrow';
 import styles from './MovieBackground.module.scss';
 import { NavLink } from 'react-router-dom';
 import routeName from '@com/config';
@@ -22,9 +18,8 @@ const MovieBackground = ({ data, isOnly }: MovieBackgroundProps) => {
 	const cx = bindClassname(styles);
 	const slideRef = useRef(null);
 	let watchParams = {
-		movieFolder: null,
-		movieID: null,
-		fileName: null,
+		movieSlug: null,
+		episodeSlug: null,
 	};
 
 	const [activeSlide, setActiveSlide] = useState<number>(0);
@@ -54,13 +49,9 @@ const MovieBackground = ({ data, isOnly }: MovieBackgroundProps) => {
 				>
 					{data.movie.map((movie, index) => {
 						if (isOnly) {
-							const { movieFolder, movieID, fileName } = getLink(
-								data.episodes[0].server_data[0].link_m3u8
-							);
 							watchParams = {
-								movieFolder,
-								movieID,
-								fileName,
+								movieSlug: movie.slug,
+								episodeSlug: data.episodes[0].server_data[0].slug,
 							};
 						}
 						return (
@@ -92,9 +83,8 @@ const MovieBackground = ({ data, isOnly }: MovieBackgroundProps) => {
 															!isOnly
 																? routeName.MoviePage(movie.slug)
 																: routeName.WatchPage(
-																		watchParams.movieFolder,
-																		watchParams.movieID,
-																		watchParams.fileName
+																		watchParams.movieSlug,
+																		watchParams.episodeSlug
 																  )
 														}`}
 													>

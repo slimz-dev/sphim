@@ -5,12 +5,12 @@ import styles from './MovieContainerSlide.module.scss';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import routeName from '@com/config';
-import { Skeleton } from '@mui/material';
 import ScrollableCategory from './components/ScrollableCategory/ScrollableCategory';
 import SkeletonMovieContainer from './components/SkeletonMovieContainer/SkeletonMovieContainer';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 import { bindClassname } from '@com/utils';
 type MovieContainerSlideProps = {
 	categories: { category: string; items: any[] }[];
@@ -60,7 +60,7 @@ const MovieContainerSlide = ({
 									<div className="relative   grid grid-cols-2 grid-rows-2 gap-2 ">
 										{cate.items.map((movie, id) => {
 											return (
-												<img
+												<LazyLoadImage
 													key={id}
 													className="w-full aspect-[116/124] object-cover  rounded-md"
 													alt="pic"
@@ -98,48 +98,5 @@ const MovieContainerSlide = ({
 		</div>
 	);
 };
-
-// {categories.map((item, index) => {
-// 	if (index % 5 === 0) {
-// 		return (
-// 			<>
-// 				{categories.slice(index, index + 5).map((cate, index) => {
-// 					return (
-// 						<div className="flex   bg-[#1a1a1a] p-6 rounded-lg  flex-col">
-// 							<div className="relative max-lg:min-w-36 lg:w-60      grid grid-cols-2 grid-rows-2 gap-2 ">
-// 								{cate.items.map((movie) => {
-// 									return (
-// 										<img
-// 											className="w-full aspect-[116/124] object-cover  rounded-md"
-// 											alt="pic"
-// 											src={`${APP_DOMAIN_CDN_IMAGE}/${movie.poster_url}`}
-// 										/>
-// 									);
-// 								})}
-// 								<div className=" absolute bottom-0 top-[12.5%] left-0 right-0 bg-[linear-gradient(_to_bottom,_rgba(0,_0,_0,_0)_0%,_rgba(6,_6,_6,_0.55)_30%,_rgba(26,_26,_26,_1)_100%_)]"></div>
-// 							</div>
-// 							<div className="relative flex justify-between items-center ">
-// 								<div>
-// 									{top && (
-// 										<div className="bg-[red] px-2 py-1 rounded-lg">
-// 											Top 10 In
-// 										</div>
-// 									)}
-// 									<span className="max-xl:text-xs">
-// 										{cate.category}
-// 									</span>
-// 								</div>
-// 								<FontAwesomeIcon
-// 									className="cursor-pointer hover:text-blue-400"
-// 									icon={faArrowRight}
-// 								/>
-// 							</div>
-// 						</div>
-// 					);
-// 				})}
-// 			</>
-// 		);
-// 	}
-// })}
 
 export default MovieContainerSlide;

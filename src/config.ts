@@ -4,8 +4,8 @@ const routeName = {
 	ListPage: () => '/list',
 	SupportPage: () => '/support',
 	SupscriptionPage: () => '/plans',
-	WatchPage: (movieFolder = ':movieFolder', movieID = ':movieID', fileName = ':fileName') =>
-		`/watch/${movieFolder}/${movieID}/${fileName}`,
+	WatchPage: (movieSlug = ':movieSlug', episodeSlug = ':episodeSlug') =>
+		`/watch/${movieSlug}/${episodeSlug}`,
 	CategoryPage: (categorySlug = ':categorySlug', type = `:type`, pageNum = ':page') =>
 		`/category/${type}/${categorySlug}/page/${pageNum}`,
 	UnknowPage: () => '*',

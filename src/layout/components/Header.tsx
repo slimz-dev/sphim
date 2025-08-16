@@ -2,24 +2,16 @@ import routeName from '@com/config';
 import { APP_DOMAIN_CDN_IMAGE } from '@com/constants';
 import useDebounce from '@com/hooks/useDebounce';
 import searchMovie from '@com/services/searchMovie';
-import { faBell } from '@fortawesome/free-regular-svg-icons';
-import {
-	faBarsStaggered,
-	faCaretUp,
-	faFilm,
-	faHeadset,
-	faHouse,
-	faMagnifyingGlass,
-	faTags,
-} from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { cardClasses } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import styles from './Header.module.scss';
 import HeaderDropdown from './HeaderDropdown';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 const cx = classNames.bind(styles);
 const Header = ({ overflow }) => {
 	const navigate = useNavigate();
@@ -79,7 +71,7 @@ const Header = ({ overflow }) => {
 				<FontAwesomeIcon size="2xl" icon={faMagnifyingGlass} color="white" />
 			</div>
 			<div className="flex justify-center items-center cursor-pointer">
-				<img src={require('@com/static/img/logo.png')} className="h-full" />
+				<LazyLoadImage src={require('@com/static/img/logo.png')} className="h-full" />
 			</div>
 			<div className="max-xl:hidden bg-black text-gray-600 flex p-1  border-4 border-[#1a1a1a] rounded-lg ">
 				<div
@@ -161,7 +153,8 @@ const Header = ({ overflow }) => {
 										key={index}
 										className="hover:bg-[#2a2a2a] hover:text-red-400 flex items-center px-3 py-2 "
 									>
-										<img
+										<LazyLoadImage
+											alt="pic"
 											src={`${APP_DOMAIN_CDN_IMAGE}/${movie.poster_url}`}
 											className="w-10 h-14"
 										/>
@@ -203,7 +196,8 @@ const Header = ({ overflow }) => {
 										key={index}
 										className="hover:bg-[#2a2a2a] hover:text-red-400 flex items-center px-3 py-2 "
 									>
-										<img
+										<LazyLoadImage
+											alt="pic"
 											src={`${APP_DOMAIN_CDN_IMAGE}/${movie.poster_url}`}
 											className="w-10 h-14"
 										/>

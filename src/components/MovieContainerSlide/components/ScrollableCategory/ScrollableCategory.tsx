@@ -5,6 +5,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../MovieContainerSlide.module.scss';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 const ScrollableCategory = ({ categories, type, top }) => {
 	const navigate = useNavigate();
 	const cx = bindClassname(styles);
@@ -28,7 +29,7 @@ const ScrollableCategory = ({ categories, type, top }) => {
 						<div className="relative min-w-36 max-w-60     grid grid-cols-2 grid-rows-2 gap-2 ">
 							{cate.items.map((movie, id) => {
 								return (
-									<img
+									<LazyLoadImage
 										key={id}
 										className="w-full aspect-[116/124] object-cover  rounded-md"
 										alt="pic"

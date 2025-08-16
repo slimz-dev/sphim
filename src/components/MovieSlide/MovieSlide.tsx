@@ -1,11 +1,12 @@
 import routeName from '@com/config';
 import { APP_DOMAIN_CDN_IMAGE, TYPE_MOVIE, TYPE_SERIES } from '@com/constants';
 import { faImdb } from '@fortawesome/free-brands-svg-icons';
-import { faArrowRight, faClock } from '@fortawesome/free-solid-svg-icons';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Skeleton } from '@mui/material';
-import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 type MovieSlideProps = {
 	slides: any[];
@@ -47,7 +48,7 @@ const MovieSlide = ({ setActiveSlide, ref, slides, type }: MovieSlideProps) => {
 									className="cursor-pointer group flex justify-center items-center bg-[#1a1a1a] p-6 rounded-lg flex-col mr-4"
 								>
 									<div className="relative   ">
-										<img
+										<LazyLoadImage
 											className="w-full aspect-[240/256] object-cover  rounded-md"
 											alt="pic"
 											src={`${APP_DOMAIN_CDN_IMAGE}/${movie.poster_url}`}
@@ -97,7 +98,7 @@ const MovieSlide = ({ setActiveSlide, ref, slides, type }: MovieSlideProps) => {
 									className="flex justify-center items-center bg-[#1a1a1a] p-6 rounded-lg flex-col mr-4"
 								>
 									<div className="relative min-w-36  ">
-										<img
+										<LazyLoadImage
 											className="w-full aspect-[240/256] object-cover  rounded-md"
 											alt="pic"
 											src={`${APP_DOMAIN_CDN_IMAGE}/${movie.poster_url}`}
