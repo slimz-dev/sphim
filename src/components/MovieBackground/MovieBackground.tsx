@@ -1,13 +1,9 @@
-import getHotMovies from '@com/services/getNewestMovie';
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import { faPlay, faPlus, faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import ChangeSlide from './components/ChangeSlide/ChangeSlide';
 import Slider from 'react-slick';
-import { APP_DOMAIN_CDN_IMAGE } from '@com/constants';
-import { movieSlice } from '@com/redux/movieSlice';
-import SlideArrow from '../SlideArrow/SlideArrow';
 import styles from './MovieBackground.module.scss';
 import { NavLink } from 'react-router-dom';
 import routeName from '@com/config';
