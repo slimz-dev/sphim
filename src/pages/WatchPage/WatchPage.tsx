@@ -1,37 +1,47 @@
+import getMovie from '@com/services/getMovie';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Hls from 'hls.js';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const WatchPage = () => {
-	const { movieFolder, movieID, fileName } = useParams();
+	const { movieSlug, episodeSlug } = useParams();
+	const [link, setLink] = useState('');
 	const navigate = useNavigate();
 	const videoRef = useRef<null | HTMLVideoElement>(null);
+	const hls = new Hls({
+		debug: true,
+	});
 	useEffect(() => {
-		const hls = new Hls({
-			debug: true,
-		});
-		if (Hls.isSupported() && videoRef.current) {
-			hls.loadSource(
-				`${process.env.REACT_APP_MOVIE_DOMAIN}/${movieFolder}/${movieID}/${fileName}`
-			);
-			hls.attachMedia(videoRef.current);
-
-			hls.on(Hls.Events.ERROR, (err) => {
-				hls.loadSource(
-					`${process.env.REACT_APP_MOVIE_SECOND_DOMAIN}/${movieFolder}/${movieID}/${fileName}`
-				);
-			});
+		const getEpisode = async () => {
+			const result = await getMovie(movieSlug);
+			if (result) {
+				setLink(() => {
+					const movieLink = result.data.episodes[0].server_data.find(
+						(episode) => episode.slug === episodeSlug
+					);
+					return movieLink.link_m3u8;
+				});
+			}
+		};
+		if (!link) {
+			getEpisode();
 		} else {
-			console.log('load');
+			console.log(link);
+			if (Hls.isSupported() && videoRef.current) {
+				hls.loadSource(link);
+				hls.attachMedia(videoRef.current);
+			} else {
+				console.log('load');
+			}
 		}
 		return () => {
 			// cleanup (when component destroyed or when useEffect runs twice on StrictMode)
 			hls.destroy();
 		};
-	}, []);
+	}, [link]);
 	return (
 		<div className="relative group">
 			<video

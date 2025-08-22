@@ -2,6 +2,7 @@ import PricingBanner from '@com/components/PricingBanner/PricingBanner';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FAQ from '../HomePage/Components/FAQ/FAQ';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const SupportPage = () => {
 	const handleChoose = () => {
@@ -17,7 +18,7 @@ const SupportPage = () => {
 					<p className="text-[#9b9da3] py-6 ">
 						We're here to help you with any problems you may be having with our product.
 					</p>
-					<img
+					<LazyLoadImage
 						className="w-full object-none  rounded-lg border-[#2b2828] border-[4px]"
 						src={require('@com/static/img/movie-container.jpg')}
 					/>
@@ -52,7 +53,7 @@ const SupportPage = () => {
 								<label className="my-3">Phone Number</label>
 								<div className=" flex w-full">
 									<div className="hover:cursor-not-allowed bg-[#141414] px-2  flex w-fit justify-center items-center border-[#262626] rounded-lg border mr-5">
-										<img
+										<LazyLoadImage
 											className="w-12 h-12"
 											src="https://png.pngtree.com/png-clipart/20211226/original/pngtree-vietnam-flag-transparent-background-in-watercolor-painted-brush-png-image_6979301.png"
 										/>

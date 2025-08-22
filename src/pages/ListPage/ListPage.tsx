@@ -1,3 +1,4 @@
+import LazyLoad from '@com/components/LazyLoad/LazyLoad';
 import MovieBackground from '@com/components/MovieBackground/MovieBackground';
 import PricingBanner from '@com/components/PricingBanner/PricingBanner';
 import { TYPE_MOVIE, TYPE_MOVIE_ENG, TYPE_SERIES, TYPE_SERIES_ENG } from '@com/constants';
@@ -61,16 +62,32 @@ const ListPage = () => {
 			<MovieBackground data={{ movie: listMovies }} isOnly={false} />
 			<Wrapper label="Movies">
 				<>
-					<Genre type={TYPE_MOVIE_ENG} header="Our Genres" />
-					<Genre type={TYPE_MOVIE_ENG} header="Popular Top 10 in Genres" top={true} />
-					<NewRelease type={TYPE_MOVIE_ENG} header="New Release" />
+					<LazyLoad>
+						<Genre type={TYPE_MOVIE_ENG} header="Our Genres" />
+					</LazyLoad>
+					<LazyLoad>
+						<Genre type={TYPE_MOVIE_ENG} header="Popular Top 10 in Genres" top={true} />
+					</LazyLoad>
+					<LazyLoad>
+						<NewRelease type={TYPE_MOVIE_ENG} header="New Release" />
+					</LazyLoad>
 				</>
 			</Wrapper>
 			<Wrapper label="Shows">
 				<>
-					<Genre type={TYPE_SERIES_ENG} header="Our Genres" />
-					<Genre type={TYPE_SERIES_ENG} header="Popular Top 10 in Genres" top={true} />
-					<NewRelease type={TYPE_SERIES_ENG} header="New Release Shows" />
+					<LazyLoad>
+						<Genre type={TYPE_SERIES_ENG} header="Our Genres" />
+					</LazyLoad>
+					<LazyLoad>
+						<Genre
+							type={TYPE_SERIES_ENG}
+							header="Popular Top 10 in Genres"
+							top={true}
+						/>
+					</LazyLoad>
+					<LazyLoad>
+						<NewRelease type={TYPE_SERIES_ENG} header="New Release Shows" />
+					</LazyLoad>
 				</>
 			</Wrapper>
 			<div className="py-20">

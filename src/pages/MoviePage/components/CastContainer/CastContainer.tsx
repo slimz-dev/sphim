@@ -1,4 +1,5 @@
 import SkeletonCast from './SkeletonCast';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const fakeImg = [
 	'https://upload.wikimedia.org/wikipedia/commons/6/69/Chris_Hemsworth_by_Gage_Skidmore_3.jpg',
@@ -31,7 +32,7 @@ const CastContainer = ({ cast }) => {
 						{cast.map((act, index) => {
 							return (
 								<div className="flex min-w-40 justify-center items-center flex-col">
-									<img
+									<LazyLoadImage
 										src={fakeImg[index]}
 										className="object-cover w-28 h-28 rounded-full"
 									/>
